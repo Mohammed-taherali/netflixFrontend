@@ -1,0 +1,51 @@
+/* Navbar styles */
+.navbar {
+    background-color: #000;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    opacity: 90%;
+}
+
+.navbar__logo img {
+    width: 100px;
+}
+
+.navbar__menu ul {
+    list-style: none;
+    display: flex;
+}
+
+.navbar__menu ul li {
+    margin-right: 20px;
+}
+
+.navbar__menu ul li:last-child {
+    margin-right: 0;
+}
+
+.navbar__menu ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.navbar__search input {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 10px;
+    border-radius: 20px;
+    width: 200px;
+    outline: none;
+}
+
+/* Style for the search input, you may want to add JS functionality for search */
+.navbar__search input:focus {
+    background-color: rgba(0, 0, 0, 0.7);
+}

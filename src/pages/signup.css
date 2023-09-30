@@ -1,0 +1,89 @@
+#login-section {
+    background-image: url("/netflix-bg-brght.jpg");
+    height: 1125px;
+    padding-bottom: 66.64%;
+    /* filter: brightness(0.75); */
+    padding-top: 10em;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: center;
+    /* font: 400; */
+}
+
+.login-wrapper {
+    /* padding-top: 10em; */
+    width: 400px;
+    padding: 3em 4em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    /* background-color: white; */
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+}
+
+input[type="checkbox"] {
+    border: 5px solid red;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+    background-color: #333;
+    outline: none;
+    border: none;
+    /* padding: 0.25em 0.5em; */
+    padding: 0.5em 1em;
+    border-radius: 0.25rem;
+}
+
+#login-btn {
+    background-color: #e50914;
+    outline: none;
+    border: none;
+    border-radius: 0.25rem;
+    color: white;
+    padding: 0.5em 1em;
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+input,
+select,
+textarea {
+    color: white;
+}
+
+::placeholder {
+    /* padding-right: 5em; */
+    /* border: 1px solid red; */
+    color: #8c8c8c;
+}
+
+.new-txt {
+    color: #737373;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.signIn {
+    font-weight: 700;
+}
+
+#errorMess {
+    color: #e50914;
+    /* font-weight: 400; */
+    /* font-size: 1.15em; */
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    max-width: 100%;
+}
