@@ -3,13 +3,28 @@ import { useNavigate } from "react-router-dom";
 import "./login.css"
 
 export default function Login() {
-
     let navigate = useNavigate();
-
     const [errorMessage, setErrorMessage] = useState("");
 
-    // Use effect to hide the message after 1 seconds
-    // TODO tomorrow
+    useEffect(() => {
+        fetch("/api/session", {
+            method: "POST",
+            body: {},
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                // Handle the response from the server
+                // console.log(data);
+                if (data.status === "success") {
+                    // navigate('/home')
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    }, [])
+
+    // Use effect to hide the message after some time
     useEffect(() => {
         const elem = document.getElementById("errorMess");
         elem.style.visibility = "visible";
@@ -37,7 +52,8 @@ export default function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(`${formData.userEmail} ${formData.userPass}`);
+        // document.getElementById("login-btn").disabled = true;
+        // console.log(`${formData.userEmail} ${formData.userPass}`);
         // console.log(e);
         // Send a POST request to your Node.js backend with formData
         fetch("/api/login", {
@@ -50,7 +66,7 @@ export default function Login() {
             .then((response) => response.json())
             .then((data) => {
                 // Handle the response from the server
-                console.log(data);
+                // console.log(data);
                 if (data.status === "success") {
                     navigate('/home')
                 } else if (data.status === "failure") {
@@ -72,7 +88,7 @@ export default function Login() {
                     <input type="text" name="userEmail" id="userEmail" placeholder="Email" onChange={handleChange} />
                     <input type="password" name="userPass" id="userPass" placeholder="Password" onChange={handleChange} />
                     <button type="submit" id="login-btn">Sign In</button>
-                    <p><span className="new-txt">New to Netflix?</span> <a href="/signup" style={{ paddingRight: "4em" }}>Sign Up Now</a></p>
+                    <p><span className="new-txt">New to Netflix?</span> <a href="/signup">Sign Up Now</a></p>
                 </div>
             </form>
         </section>

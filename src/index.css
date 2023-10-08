@@ -3,3 +3,7 @@ body {
     font-family: "Poppins", "Roboto", sans-serif;
     /* background-image: url("/netflix-bg.jpg"); */
 }
+
+#root {
+    background-color: black;
+}

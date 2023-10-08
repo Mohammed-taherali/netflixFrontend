@@ -7,6 +7,7 @@ export default function SignUp() {
     let navigate = useNavigate();
 
     const [errorMessage, setErrorMessage] = useState("");
+    const [waitMess, setWaitMess] = useState("");
 
     // Use effect to hide the message after 1 seconds
     // TODO tomorrow
@@ -16,9 +17,9 @@ export default function SignUp() {
         elem.style.opacity = "1";
         // console.log("use effect called");
         setTimeout(() => {
-            setErrorMessage("");
             elem.style.visibility = "hidden";
             elem.style.opacity = "0";
+            setErrorMessage("");
         }, 10000);
     }, [errorMessage])
 
@@ -48,6 +49,8 @@ export default function SignUp() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // setErrorMessage("Please wait...")
+        setWaitMess("Please wait...")
         fetch("/api/signup", {
             method: "POST",
             headers: {
@@ -58,10 +61,14 @@ export default function SignUp() {
             .then((response) => response.json())
             .then((data) => {
                 // Handle the response from the server
-                console.log(data);
+                // console.log(data);
                 if (data.status === "success") {
-                    navigate('/home')
+                    setWaitMess("User successfully created!")
+                    setTimeout(() => {
+                        navigate('/login')
+                    }, 2000);
                 } else if (data.status === "failure") {
+                    setWaitMess("")
                     setErrorMessage(data.message)
                 }
             })
@@ -75,6 +82,7 @@ export default function SignUp() {
                 <div className="login-wrapper">
                     <h2 className="signIn">Sign Up</h2>
                     <span id="errorMess">{errorMessage}</span>
+                    <span>{waitMess}</span>
                     <input type="text" name="userName" id="userName" placeholder="Email" onChange={handleChange} />
                     <input type="password" name="userPass" id="userPass" placeholder="Password" onChange={handleChange} />
                     <input type="password" name="confirmPass" id="confirmPass" placeholder="Confirm Password" onChange={handleChange} />

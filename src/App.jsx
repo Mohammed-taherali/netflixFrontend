@@ -34,6 +34,7 @@ export default function App() {
                 <Route path="/search" element={<Search />} />
                 <Route path="/movie/:id" element={<Details />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/" element={<Home />} />
             </Routes>
             <Footer />
         </Router>

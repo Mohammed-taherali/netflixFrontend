@@ -1,14 +1,14 @@
 /* Navbar styles */
 .navbar {
-    background-color: #000;
+    /* background-color: #000; */
     color: #000;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 30px;
-    background: transparent;
+    /* background: transparent; */
     backdrop-filter: blur(10px);
-    opacity: 90%;
+    opacity: 80%;
 }
 
 .navbar__logo img {
@@ -18,6 +18,13 @@
 .navbar__menu ul {
     list-style: none;
     display: flex;
+}
+
+.nav-1,
+.nav-2 {
+    display: flex;
+    column-gap: 0.5em;
+    align-items: center;
 }
 
 .navbar__menu ul li {
@@ -45,7 +52,40 @@
     outline: none;
 }
 
+.userIcon {
+    width: 45px;
+    height: 45px;
+}
+
 /* Style for the search input, you may want to add JS functionality for search */
 .navbar__search input:focus {
     background-color: rgba(0, 0, 0, 0.7);
+}
+
+.dropdownAnchor {
+    color: white;
+    cursor: pointer;
+    padding: 0.25em;
+    margin-left: 0.25em;
+    background-color: transparent;
+    border: none;
+    /* width: 20px; */
+}
+
+.dropdownAnchor:hover {
+    /* border: 1px solid black; */
+    box-shadow: 0 0 4px grey;
+}
+
+#logout {
+    color: black;
+}
+
+select {
+    background: transparent;
+    /* border: none; */
+}
+
+select option {
+    padding: 10em;
 }

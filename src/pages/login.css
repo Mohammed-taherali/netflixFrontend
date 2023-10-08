@@ -44,6 +44,15 @@ textarea {
     margin-bottom: 2em;
 }
 
+#login-btn:hover {
+    box-shadow: 2px 2px 1px rgb(172, 42, 42);
+    outline: 1px solid white;
+}
+#login-btn:focus:active {
+    outline: 1px solid white;
+    box-shadow: 2px 2px 1px rgb(172, 42, 42);
+}
+
 input,
 select,
 textarea {
