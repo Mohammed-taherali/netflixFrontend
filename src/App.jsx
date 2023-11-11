@@ -1,42 +1,28 @@
-import React, { useState, useEffect } from "react";
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css"
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import Details from './pages/details';
 import Home from './pages/home';
 import Login from './pages/login';
 import Search from './pages/search';
 import SignUp from './pages/signup';
+import MyList from "./pages/MyList";
 
-export default function App() {
+export default function App({ hideLoader, showLoader }) {
+
+    useEffect(hideLoader, []);
 
     return (
         <Router>
-            <Navbar />
-            {/* <nav>
-                <ul>
-                    <li>
-                        <NavLink to="/">Home</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/login">Login</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/signup">Sign Up</NavLink>
-                    </li>
-                </ul>
-            </nav> */}
             <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/search" element={<Search />} />
-                <Route path="/movie/:id" element={<Details />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login showLoader={showLoader} hideLoader={hideLoader} />} />
+                <Route path="/signup" element={<SignUp showLoader={showLoader} hideLoader={hideLoader} />} />
+                <Route path="/search" element={<Search showLoader={showLoader} hideLoader={hideLoader} />} />
+                <Route path="/movie/:id" element={<Details showLoader={showLoader} hideLoader={hideLoader} />} />
+                <Route path="/home" element={<Home showLoader={showLoader} hideLoader={hideLoader} />} />
+                <Route path="/" element={<Home showLoader={showLoader} hideLoader={hideLoader} />} />
+                <Route path="/MyList" element={<MyList showLoader={showLoader} hideLoader={hideLoader} />} />
             </Routes>
-            <Footer />
         </Router>
 
     )

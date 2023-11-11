@@ -2,20 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./signup.css"
 
-export default function SignUp() {
+export default function SignUp({ showLoader, hideLoader }) {
 
     let navigate = useNavigate();
 
     const [errorMessage, setErrorMessage] = useState("");
     const [waitMess, setWaitMess] = useState("");
 
-    // Use effect to hide the message after 1 seconds
-    // TODO tomorrow
+    // Use effect to hide the message after 10 seconds
     useEffect(() => {
         const elem = document.getElementById("errorMess");
         elem.style.visibility = "visible";
         elem.style.opacity = "1";
-        // console.log("use effect called");
         setTimeout(() => {
             elem.style.visibility = "hidden";
             elem.style.opacity = "0";
@@ -31,7 +29,6 @@ export default function SignUp() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        // console.log("n v= ", name, value);
         setFormData({
             ...formData,
             [name]: value,
@@ -49,7 +46,6 @@ export default function SignUp() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // setErrorMessage("Please wait...")
         setWaitMess("Please wait...")
         fetch("/api/signup", {
             method: "POST",
@@ -61,7 +57,6 @@ export default function SignUp() {
             .then((response) => response.json())
             .then((data) => {
                 // Handle the response from the server
-                // console.log(data);
                 if (data.status === "success") {
                     setWaitMess("User successfully created!")
                     setTimeout(() => {

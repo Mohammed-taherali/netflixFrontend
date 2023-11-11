@@ -1,28 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css"
+import netflixLogo from "/Netflix.svg"
 
-export default function Login() {
+export default function Login({ showLoader, hideLoader }) {
     let navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState("");
-
-    useEffect(() => {
-        fetch("/api/session", {
-            method: "POST",
-            body: {},
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                // Handle the response from the server
-                // console.log(data);
-                if (data.status === "success") {
-                    // navigate('/home')
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }, [])
 
     // Use effect to hide the message after some time
     useEffect(() => {
@@ -43,7 +26,6 @@ export default function Login() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        // console.log("n v= ", name, value);
         setFormData({
             ...formData,
             [name]: value,
@@ -52,10 +34,7 @@ export default function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // document.getElementById("login-btn").disabled = true;
-        // console.log(`${formData.userEmail} ${formData.userPass}`);
-        // console.log(e);
-        // Send a POST request to your Node.js backend with formData
+        showLoader();
         fetch("/api/login", {
             method: "POST",
             headers: {
@@ -65,15 +44,12 @@ export default function Login() {
         })
             .then((response) => response.json())
             .then((data) => {
-                // Handle the response from the server
-                // console.log(data);
+                hideLoader();
                 if (data.status === "success") {
                     navigate('/home')
                 } else if (data.status === "failure") {
                     setErrorMessage(data.message)
                 }
-
-
             })
             .catch((error) => {
                 console.error("Error:", error);
@@ -81,6 +57,9 @@ export default function Login() {
     };
     return (
         <section id="login-section">
+            <div className="N-logo">
+                <img src={netflixLogo} className="logo-img" alt="Netflix Logo" />
+            </div>
             <form onSubmit={handleSubmit} className="loggin-wrapper-form">
                 <div className="login-wrapper">
                     <h2 className="signIn">Sign In</h2>

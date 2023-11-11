@@ -1,12 +1,11 @@
 /* Navbar styles */
 .navbar {
-    /* background-color: #000; */
-    color: #000;
+    color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 30px;
-    /* background: transparent; */
+    background: transparent;
     backdrop-filter: blur(10px);
     opacity: 80%;
 }
@@ -15,31 +14,46 @@
     width: 100px;
 }
 
-.navbar__menu ul {
-    list-style: none;
-    display: flex;
+#search:focus {
+    border: 1px solid white;
 }
 
-.nav-1,
-.nav-2 {
-    display: flex;
+#basic-nav-dropdown {
+    color: white;
+}
+
+#basic-nav-dropdown:hover {
+    box-shadow: 0 0 4px grey;
+    color: white;
+}
+
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+    left: -7em;
+}
+
+.navbar-brand {
+    padding-top: 0;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link a {
+    font-size: 1.2em;
+}
+.navbar-expand-lg .navbar-nav .nav-link:hover {
+    text-decoration: none;
+}
+.navbar-expand-lg .navbar-nav .nav-link a:hover {
+    text-decoration: none;
+    color: red;
+    font-size: 1.2em;
+}
+
+.dropdown-item {
+    text-decoration: none !important;
+}
+
+.second-nav {
     column-gap: 0.5em;
     align-items: center;
-}
-
-.navbar__menu ul li {
-    margin-right: 20px;
-}
-
-.navbar__menu ul li:last-child {
-    margin-right: 0;
-}
-
-.navbar__menu ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
 }
 
 .navbar__search input {
@@ -57,35 +71,31 @@
     height: 45px;
 }
 
-/* Style for the search input, you may want to add JS functionality for search */
 .navbar__search input:focus {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.dropdownAnchor {
+.tcolor {
     color: white;
-    cursor: pointer;
-    padding: 0.25em;
-    margin-left: 0.25em;
-    background-color: transparent;
-    border: none;
-    /* width: 20px; */
 }
 
-.dropdownAnchor:hover {
-    /* border: 1px solid black; */
-    box-shadow: 0 0 4px grey;
+.navbar-toggler-icon {
+    color: red;
+}
+.nav-link {
+    color: white;
+    font-size: 1.2em;
 }
 
-#logout {
-    color: black;
+.nav-link.active {
+    color: red !important;
+    font-size: 1.2em;
 }
 
-select {
-    background: transparent;
-    /* border: none; */
+.nav-link:hover {
+    color: red;
 }
 
-select option {
-    padding: 10em;
+.custom-bg {
+    background-color: black !important;
 }

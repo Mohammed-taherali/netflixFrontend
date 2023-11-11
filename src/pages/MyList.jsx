@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MyNavbar from "../components/MyNavbar";
+import "./MyList.css";
 
-export default function Search({ showLoader, hideLoader }) {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [searchData, setSearchData] = useState([]);
-    const base_path = import.meta.env.VITE_BACKDROP_URL;
+export default function MyList() {
     const navigate = useNavigate();
-    const queryBody = { "query": searchParams.get("query") };
+    const [listDiv, setListDiv] = useState([]);
 
     const goToMovie = (movie) => {
         const requestBody = {
@@ -16,7 +14,6 @@ export default function Search({ showLoader, hideLoader }) {
         let movieInfo = {
             movie: movie
         }
-
         fetch("/api/insertNewMovie", {
             method: "POST",
             headers: {
@@ -26,6 +23,7 @@ export default function Search({ showLoader, hideLoader }) {
         })
             .then(resp => resp.json())
             .then(respVal => {
+                console.log(respVal);
                 if (respVal.status == "failure") {
                     navigate("/login")
                 }
@@ -49,41 +47,49 @@ export default function Search({ showLoader, hideLoader }) {
             })
     }
 
+    const createDivs = (movies) => {
+        const base_path = import.meta.env.VITE_BACKDROP_URL;
+        const movieDivs = movies.map((movie) => {
+            const bgImg = base_path + movie.backdrop_path;
+            return (
+                <div key={movie.id} className="list-div">
+                    <img title={movie.title} onClick={() => goToMovie(movie)} className="listImg" src={bgImg} alt="" />
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        <h4>{movie.title}</h4>
+                        <p>
+                            {movie.overview}
+                        </p>
+                    </div>
+                </div>
+            );
+        });
+        setListDiv(movieDivs);
+    };
+
     useEffect(() => {
-        fetch("/api/movieSearch", {
+        fetch("/api/getMyList", {
             method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(queryBody)
+            body: {},
         })
-            .then(resp => resp.json())
-            .then(data => {
+            .then((resp) => resp.json())
+            .then((data) => {
                 if (data.status === "failure") {
                     navigate("/login");
                 } else {
-                    setSearchData(data.result.results);
+                    createDivs(data.data);
                 }
             });
-    }, [queryBody.query, navigate]);
+    }, []);
 
     return (
-        <section id="search-div">
+        <>
             <MyNavbar />
-            <h4>search results for: {queryBody.query}</h4>
-            <div className="res-div">
-                {searchData.map(movie => {
-                    if (movie.backdrop_path) {
-                        const bgImg = base_path + movie.backdrop_path;
-                        return (
-                            <div key={movie.id} className="relMovieDiv" onClick={() => goToMovie(movie)} title={movie.title}>
-                                <img src={bgImg} alt={movie.title} className="relImg" />
-                                <p style={{ color: "white" }}>{movie.title}</p>
-                            </div>
-                        );
-                    }
-                })}
-            </div>
-        </section>
+            <section id="list-section">
+                <b style={{ fontSize: "3em" }}>My List</b>
+                <div className="grid-cont">
+                    {listDiv}
+                </div>
+            </section>
+        </>
     );
 }
